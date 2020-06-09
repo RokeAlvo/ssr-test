@@ -44,14 +44,15 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
-    '@nuxtjs/proxy'
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true
+  },
 
   proxy: [
     // Proxies /foo to http://example.com/foo
