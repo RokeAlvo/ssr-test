@@ -1,35 +1,37 @@
 <template>
   <div class="container">
+    <h2>static components</h2>
     <div>
-      <logo />
-      <h1 class="title">
-        ssr-test
-      </h1>
-      <h2 class="subtitle">
-        My sublime Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <component
+        :is="comp.component"
+        v-for="comp in components"
+        :key="comp.name"
+        v-bind="comp.props"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+const getComponent = (name) => ({
+  component: import(`./../components/${name}`)
+})
 
 export default {
-  components: {
-    Logo
+  async asyncData({ $axios }) {
+    const componentsData = (await $axios.$get('/components')).data
+    return { componentsData }
+  },
+  created() {
+    const componentList = this.componentsData
+    this.components = {}
+    componentList.forEach((component) => {
+      this.components[component.name] = {
+        component: () => getComponent(component.name),
+        name: component.name,
+        props: component.settings
+      }
+    })
   }
 }
 </script>
@@ -38,10 +40,6 @@ export default {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
 .title {

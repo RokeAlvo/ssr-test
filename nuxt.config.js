@@ -58,6 +58,10 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, { isDev, isClient }) {
+      if (isDev) {
+        config.devtool = 'eval-source-map' // Something you like
+      }
+    }
   }
 }
