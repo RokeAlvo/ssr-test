@@ -14,6 +14,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/proxy": "^2.0.0",
     "fastify": "^2.14.1",
     "fastify-cors": "^3.0.3",
     "nuxt": "^2.0.0"
