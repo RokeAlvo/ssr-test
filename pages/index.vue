@@ -1,12 +1,14 @@
 <template>
   <div class="container">
-    <h2>static components</h2>
-    <div>
+    <h2 class="container__header">static components</h2>
+    <nuxt-link to="two">two</nuxt-link>
+    <div class="container__content">
       <component
         :is="comp.component"
         v-for="comp in components"
         :key="comp.name"
         v-bind="comp.props"
+        class="container__item"
       />
     </div>
   </div>
@@ -40,27 +42,7 @@ export default {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+  display: grid;
+  grid-gap: 20px 20px;
 }
 </style>
